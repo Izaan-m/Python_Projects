@@ -1,0 +1,101 @@
+Analysis of Amazon Sales Data
+1. Data Overview and Preparation
+Initial Data Shape and Columns:
+
+The dataset initially contains 128,976 rows and 21 columns. After removing duplicates and missing values, the dataset was reduced to 128,808 rows.
+Data Cleaning:
+
+Duplicates: 168 duplicated rows were found and removed.
+Missing Values: All rows with missing values were dropped, which might lead to loss of data but ensures the remaining dataset is complete.
+
+
+2. Data Visualizations
+
+
+Q1: How does the distribution of order quantities vary by category?
+
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='Category', y='Qty', data=df)
+plt.title('Distribution of Order Quantities by Category')
+plt.xlabel('Category')
+plt.ylabel('Order Quantity')
+plt.grid(True)
+plt.show()
+Analysis:
+The box plot shows the spread and distribution of order quantities across different categories.
+It helps identify which categories have higher or lower order quantities and if there are any significant outliers.
+Categories with wider boxes or higher medians indicate larger order quantities, while narrower boxes suggest more consistent quantities.
+
+
+
+Q2: What is the distribution of sales amounts for different sales channels?
+
+sns.boxplot(x='Sales Channel', y='Amount', data=df)
+plt.title('Distribution of Sales Amounts by Sales Channel')
+plt.xlabel('Sales Channel')
+plt.ylabel('Amount')
+plt.show()
+Analysis:
+This box plot reveals how sales amounts vary across different sales channels.
+Differences in the box plot heights and the presence of outliers can show which sales channels are more lucrative or variable.
+Sales channels with higher median lines and larger interquartile ranges (IQR) generally have higher sales amounts.
+
+
+
+Q3: What is the distribution of sales amounts?
+
+plt.figure(figsize=(12, 6))
+plt.hist(df['Amount'], bins=10, color='Red', edgecolor='Black')
+plt.title('Distribution of Sales Amount')
+plt.xlabel('Amount')
+plt.ylabel('Frequency')
+plt.show()
+Analysis:
+The histogram shows the frequency distribution of sales amounts.
+It helps to understand the overall sales distribution, such as whether most sales fall into a specific range or if there are a few large transactions.
+The shape of the histogram can reveal whether sales amounts are skewed to the left (more lower values) or right (more higher values).
+
+
+
+
+Q4: Is there a relationship between order quantity and sales amount?
+
+plt.scatter(df['Qty'], df['Amount'], color='Green', edgecolor='Red')
+plt.title('Sales Amount vs. Order Quantity')
+plt.xlabel('Order Quantity')
+plt.ylabel('Sales Amount')
+plt.show()
+Analysis:
+The scatter plot helps visualize the relationship between order quantity and sales amount.
+A positive correlation might be observed if higher quantities tend to lead to higher sales amounts.
+The spread and density of points can provide insights into how order quantity impacts sales, indicating potential patterns or anomalies.
+
+
+
+Q5: What is the total sales amount by category?
+
+category_sales = df.groupby('Category')['Amount'].sum()
+
+plt.figure(figsize=(10, 6))
+category_sales.plot(kind='bar', color='coral')
+plt.title('Total Sales Amount by Category')
+plt.xlabel('Category')
+plt.ylabel('Total Sales Amount')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+
+
+Analysis:
+This bar plot illustrates the total sales amount for each category.
+It provides a clear comparison of sales performance across different categories, highlighting which categories contribute the most to the total sales.
+Categories with higher bars are the most significant in terms of revenue, which can guide strategic decisions and focus areas.
+
+
+
+Summary
+
+
+Distribution Insights: By analyzing distributions and visualizing order quantities and sales amounts, you gain a better understanding of how sales performance varies across categories and sales channels.
+Relationship Analysis: The scatter plot helps explore the relationship between order quantities and sales amounts, which can inform inventory and pricing strategies.
+Category Performance: The bar plot provides a clear view of how each category contributes to total sales, useful for identifying key revenue drivers and optimizing category management.
